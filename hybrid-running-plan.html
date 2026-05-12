@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Running Híbrido — 12 Semanas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --surface: #111114;
+    --card: #16161a;
+    --border: #242428;
+    --accent: #e8ff47;
+    --accent2: #ff6b35;
+    --accent3: #47c9ff;
+    --text: #f0f0f2;
+    --muted: #888890;
+    --zone2: #47c9ff;
+    --quality: #ff6b35;
+    --longrun: #c47aff;
+    --gym: #888890;
+    --functional: #4dffb0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────── */
+  header {
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(232,255,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.3);
+    padding: 4px 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    max-width: 800px;
+  }
+  h1 span { color: var(--accent); }
+  .header-meta {
+    margin-top: 24px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ─── LAYOUT ──────────────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  section { margin-bottom: 56px; }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* ─── SCIENCE PILLARS ─────────────────────────────── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .pillar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .pillar-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    color: rgba(232,255,71,0.12);
+    position: absolute;
+    top: 12px; right: 16px;
+  }
+  .pillar-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .pillar p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ─── ZONE LEGEND ─────────────────────────────────── */
+  .zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .zone-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .zone-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .zone-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .zone-card p { font-size: 12px; color: var(--muted); }
+
+  /* ─── WEEKLY STRUCTURE ────────────────────────────── */
+  .week-grid {
+    display: grid;
+    gap: 6px;
+  }
+  .day-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .day-label {
+    background: var(--surface);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .day-abbr {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .day-content {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .session-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 2px;
+    width: fit-content;
+  }
+  .session-tag.gym { background: rgba(136,136,144,0.15); color: #aaa; border: 1px solid rgba(136,136,144,0.2); }
+  .session-tag.zone2 { background: rgba(71,201,255,0.12); color: var(--zone2); border: 1px solid rgba(71,201,255,0.2); }
+  .session-tag.quality { background: rgba(255,107,53,0.12); color: var(--quality); border: 1px solid rgba(255,107,53,0.2); }
+  .session-tag.longrun { background: rgba(196,122,255,0.12); color: var(--longrun); border: 1px solid rgba(196,122,255,0.2); }
+  .session-tag.functional { background: rgba(77,255,176,0.12); color: var(--functional); border: 1px solid rgba(77,255,176,0.2); }
+  .session-tag.rest { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+  .session-note { font-size: 12px; color: var(--muted); padding: 0 2px; }
+
+  /* ─── PROGRESSION TABLE ───────────────────────────── */
+  .prog-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .prog-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .prog-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .prog-table tr:last-child td { border-bottom: none; }
+  .prog-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .prog-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .deload-row td { background: rgba(255,107,53,0.05) !important; }
+  .deload-row td:first-child { color: var(--quality) !important; }
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    margin-top: 3px;
+    border-radius: 1px;
+  }
+  .badge.deload { background: rgba(255,107,53,0.15); color: var(--quality); border: 1px solid rgba(255,107,53,0.3); }
+  .badge.test { background: rgba(232,255,71,0.12); color: var(--accent); border: 1px solid rgba(232,255,71,0.3); }
+
+  /* ─── PACES ───────────────────────────────────────── */
+  .paces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .pace-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+  }
+  .pace-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .pace-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .pace-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .pace-card.z2 .pace-title, .pace-card.z2 .pace-value { color: var(--zone2); }
+  .pace-card.quality .pace-title, .pace-card.quality .pace-value { color: var(--quality); }
+  .pace-card.longrun .pace-title, .pace-card.longrun .pace-value { color: var(--longrun); }
+  .pace-card.race .pace-title, .pace-card.race .pace-value { color: var(--accent); }
+
+  /* ─── INTERVALS ───────────────────────────────────── */
+  .interval-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .interval-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 18px;
+  }
+  .interval-phase {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .interval-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .interval-rows { display: flex; flex-direction: column; gap: 6px; }
+  .interval-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .interval-row .label { color: var(--muted); }
+  .interval-row .value { font-weight: 600; font-family: 'DM Mono', monospace; font-size: 11px; }
+
+  /* ─── MUSCLE PRESERVATION ─────────────────────────── */
+  .preserve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .preserve-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 16px 18px;
+  }
+  .preserve-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .preserve-card ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .preserve-card ul li {
+    font-size: 12px;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+  }
+  .preserve-card ul li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  /* ─── TARGETS ─────────────────────────────────────── */
+  .targets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .target {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+  }
+  .target-week {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .target-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .target-desc { font-size: 12px; color: var(--muted); }
+
+  /* ─── INFO BLOCKS ─────────────────────────────────── */
+  .info-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent3);
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .info-block strong { color: var(--text); }
+
+  /* ─── RESPONSIVE ──────────────────────────────────── */
+  @media (max-width: 600px) {
+    header { padding: 40px 20px 28px; }
+    main { padding: 28px 16px 60px; }
+    .day-row { grid-template-columns: 80px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Hybrid Athlete Protocol · 12 Semanas</div>
+  <h1>PLAN DE<br><span>RUNNING</span><br>HÍBRIDO</h1>
+  <div class="header-meta">
+    <div class="meta-item">
+      <span class="meta-label">Perfil</span>
+      <span class="meta-value">Hombre · 75–78 kg · ~17% BF</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Fase</span>
+      <span class="meta-value">Bulk → Definición</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Objetivo</span>
+      <span class="meta-value">5K PR + 10K cómodo</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Sesiones running</span>
+      <span class="meta-value">3 / semana</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ─── FUNDAMENTO CIENTÍFICO ─────────────────────── -->
+  <section>
+    <h2>Fundamento Científico</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Concurrent Training</div>
+        <p>Wilson et al. (2012) y Fyfe et al. (2014) demuestran que el cardio aeróbico de baja intensidad (Zona 2) genera <em>mínima interferencia</em> con hipertrofia cuando el volumen es controlado. El mayor conflicto ocurre con HIIT de alta frecuencia.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Polarización 80/20</div>
+        <p>Seiler (2010) describe que atletas de élite distribuyen ~80% del volumen en baja intensidad y ~20% en alta. Esto maximiza adaptaciones aeróbicas sin acumular fatiga del SNC que interfiera con el gimnasio.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Progresión del Long Run</div>
+        <p>La regla del 10% semanal (American College of Sports Medicine) minimiza riesgo de lesión. Tu progresión de +1K/semana desde 7K hasta 10K es fisiológicamente correcta y segura.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Síntesis Proteica</div>
+        <p>Phillips & Van Loon (2011): consumir 0.4g/kg de proteína cada 3–4h y priorizar ~40–50g post-entreno pesado preserva la masa muscular en déficit calórico con alto volumen de entrenamiento.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">05</div>
+        <div class="pillar-title">Secuenciación de Sesiones</div>
+        <p>Coffey & Hawley (2017): separar gimnasio y running por al menos 6–8h reduce la interferencia molecular (AMPK vs mTOR). Si van en el mismo día, primero fuerza, luego cardio.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">06</div>
+        <div class="pillar-title">Descargas Periódicas</div>
+        <p>Issurin (2010): bloques de sobrecarga de 3 semanas seguidos de 1 semana de descarga (deload) maximizan supercompensación y reducen acumulación de fatiga crónica.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ZONAS DE INTENSIDAD ───────────────────────── -->
+  <section>
+    <h2>Zonas de Intensidad</h2>
+    <div class="zones">
+      <div class="zone-card">
+        <div class="zone-dot" style="background:var(--zone2)"></div>
+        <div>
+          <div class="zone-card-title" style="color:var(--zone2)">Zona 2 — Aeróbico Base</div>
+          <p>65–75% FCmáx. Puedes mantener una conversación. Activa las mitocondrias sin estresar el SNC. Base del 80% del volumen total.</p>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-dot" style="background:#a8e063"></div>
+        <div>
+          <div class="zone-card-title" style="color:#a8e063">Zona 3 — Tempo Suave</div>
+          <p>75–85% FCmáx. Frases cortas. Ritmo de carrera larga progresiva. Se usa en las semanas 5–8 para preparar el tempo.</p>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-dot" style="background:var(--quality)"></div>
+        <div>
+          <div class="zone-card-title" style="color:var(--quality)">Zona 4 — Tempo / Umbral</div>
+          <p>85–92% FCmáx. "Duro pero sostenible". Eleva el umbral de lactato. Mejora el ritmo de 5K–10K directamente.</p>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-dot" style="background:#ff3838"></div>
+        <div>
+          <div class="zone-card-title" style="color:#ff3838">Zona 5 — VO2máx</div>
+          <p>92–100% FCmáx. Intervalos cortos (400–1000m). Máxima potencia aeróbica. Solo en semanas 9–12 y con moderación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ESTRUCTURA SEMANAL ────────────────────────── -->
+  <section>
+    <h2>Estructura Semanal</h2>
+    <div class="week-grid">
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">LUN</span>
+          <span class="day-abbr">Lunes</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag gym">🏋️ Upper Pesado + Abdomen</span>
+          <span class="session-note">Prioridad fuerza. Pesado primero del día. Sin running.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">MAR</span>
+          <span class="day-abbr">Martes</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag functional">⚡ Funcional HYROX</span>
+          <span class="session-tag zone2">🫁 Running Zona 2</span>
+          <span class="session-note">Si van juntos: funcional primero, Z2 después. Idealmente separar 4–6h.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">MIÉ</span>
+          <span class="day-abbr">Miércoles</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag gym">🦵 Pierna Pesada</span>
+          <span class="session-note">Día crítico. Sin running. Full recuperación para calidad del jueves.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">JUE</span>
+          <span class="day-abbr">Jueves</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag quality">🔥 Running Calidad (Intervalos / Tempo)</span>
+          <span class="session-note">Sesión más exigente de running. Preferiblemente a.m. o tarde si pierna fue el miércoles.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">VIE</span>
+          <span class="day-abbr">Viernes</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag gym">🏋️ Upper Pesado + Abdomen</span>
+          <span class="session-note">Recovery activo post-calidad. Foco en upper para no estresar piernas.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">SÁB</span>
+          <span class="day-abbr">Sábado</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag functional">⚡ Funcional HYROX</span>
+          <span class="session-tag longrun">🏃 Long Run</span>
+          <span class="session-note">Funcional primero (si el orden lo permite). Long Run a ritmo conversacional.</span>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">DOM</span>
+          <span class="day-abbr">Domingo</span>
+        </div>
+        <div class="day-content">
+          <span class="session-tag rest">😴 Descanso Completo</span>
+          <span class="session-note">Movilidad, stretching o caminar si se desea. Sin carga de entrenamiento.</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-block">
+      <strong>⚠️ Regla de secuenciación:</strong> Nunca hagas running de calidad (intervalos/tempo) el día después de pierna pesada. La fatiga residual en cuádriceps y glúteos aumenta el riesgo de lesión y reduce la calidad del estímulo. Por eso el esquema Miércoles (pierna) → Jueves (calidad) solo funciona si descansas el miércoles en running.
+    </div>
+  </section>
+
+  <!-- ─── RITMOS SUGERIDOS ───────────────────────────── -->
+  <section>
+    <h2>Ritmos Sugeridos</h2>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:16px;">Basado en un corredor con 5K aproximado actual de <strong style="color:var(--text)">27–30 min</strong>. Ajusta según tu tiempo real. FC = Frecuencia Cardíaca.</p>
+    <div class="paces-grid">
+      <div class="pace-card z2">
+        <div class="pace-title">Zona 2 — Base Aeróbica</div>
+        <div class="pace-value">6:30–7:30</div>
+        <div class="pace-desc">min/km · 65–75% FCmáx · Puedes hablar en frases completas. Si sientes que es "demasiado fácil", es correcto.</div>
+      </div>
+      <div class="pace-card longrun">
+        <div class="pace-title">Long Run</div>
+        <div class="pace-value">6:45–7:30</div>
+        <div class="pace-desc">min/km · Similar a Zona 2 o levemente más rápido en últimos km. Nunca más de 75% FCmáx.</div>
+      </div>
+      <div class="pace-card quality">
+        <div class="pace-title">Tempo / Umbral</div>
+        <div class="pace-value">5:30–6:00</div>
+        <div class="pace-desc">min/km · 85–90% FCmáx · Frases cortas. "Duro pero sostenible" durante 20–30 min. Ritmo de carrera de 10K.</div>
+      </div>
+      <div class="pace-card race">
+        <div class="pace-title">Intervalos VO2máx</div>
+        <div class="pace-value">4:50–5:20</div>
+        <div class="pace-desc">min/km · 90–95% FCmáx · Solo bloques de 400–800m con recuperación. Ritmo más rápido de tus sesiones.</div>
+      </div>
+    </div>
+    <div class="info-block">
+      <strong>Calibración inicial:</strong> En la semana 1, haz un test de 5K a esfuerzo máximo (no sprint, sino el ritmo más rápido sostenible). Usa ese tiempo para calcular tus ritmos con precisión usando la fórmula de Jack Daniels o la calculadora de Strava. Los ritmos de arriba son orientativos para ~28–29 min en 5K.
+    </div>
+  </section>
+
+  <!-- ─── PROGRESIÓN 12 SEMANAS ─────────────────────── -->
+  <section>
+    <h2>Progresión 12 Semanas</h2>
+    <table class="prog-table">
+      <thead>
+        <tr>
+          <th>Semana</th>
+          <th>Zona 2 (Mar)</th>
+          <th>Calidad (Jue)</th>
+          <th>Long Run (Sáb)</th>
+          <th>Vol. Total</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S1</td>
+          <td>4 km Z2</td>
+          <td>3×800m @ 5K pace + 400m rec</td>
+          <td>7 km conversacional</td>
+          <td>~17 km</td>
+          <td>Test 5K inicial. Calibrar ritmos.</td>
+        </tr>
+        <tr>
+          <td>S2</td>
+          <td>4.5 km Z2</td>
+          <td>4×800m @ 5K pace + 400m rec</td>
+          <td>8 km conversacional</td>
+          <td>~19 km</td>
+          <td>Primer aumento long run.</td>
+        </tr>
+        <tr>
+          <td>S3</td>
+          <td>5 km Z2</td>
+          <td>5×800m @ 5K pace + 400m rec</td>
+          <td>9 km conversacional</td>
+          <td>~21 km</td>
+          <td>Pico del bloque 1.</td>
+        </tr>
+        <tr class="deload-row">
+          <td>S4 <span class="badge deload">DELOAD</span></td>
+          <td>3 km Z2 suave</td>
+          <td>3×600m suave + descanso activo</td>
+          <td>7 km suave</td>
+          <td>~13 km</td>
+          <td>Reducir 35–40% volumen. Mantener intensidad leve.</td>
+        </tr>
+        <tr>
+          <td>S5</td>
+          <td>5 km Z2</td>
+          <td>20 min Tempo continuo (Z4)</td>
+          <td>9 km conversacional</td>
+          <td>~20 km</td>
+          <td>Introducción Tempo. Bloque 2 inicia.</td>
+        </tr>
+        <tr>
+          <td>S6</td>
+          <td>5.5 km Z2</td>
+          <td>25 min Tempo continuo (Z4)</td>
+          <td>10 km conversacional</td>
+          <td>~22 km</td>
+          <td><strong>¡PRIMER 10K!</strong> A ritmo cómodo Z2–Z3.</td>
+        </tr>
+        <tr>
+          <td>S7</td>
+          <td>6 km Z2</td>
+          <td>2×15 min Tempo con 3 min rec</td>
+          <td>10 km con últimos 2 km a ritmo Z3</td>
+          <td>~24 km</td>
+          <td>Pico bloque 2. Exigente.</td>
+        </tr>
+        <tr class="deload-row">
+          <td>S8 <span class="badge deload">DELOAD</span></td>
+          <td>3.5 km Z2</td>
+          <td>4×600m @ Tempo pace con rec</td>
+          <td>7 km suave</td>
+          <td>~15 km</td>
+          <td>Deload completo. Prioriza recuperación pierna.</td>
+        </tr>
+        <tr>
+          <td>S9</td>
+          <td>6 km Z2</td>
+          <td>6×400m @ VO2máx + 400m rec</td>
+          <td>10 km Z2</td>
+          <td>~23 km</td>
+          <td>Introducción VO2máx. Bloque final.</td>
+        </tr>
+        <tr>
+          <td>S10</td>
+          <td>6 km Z2</td>
+          <td>8×400m @ VO2máx + 400m rec</td>
+          <td>10 km con últimos 3 km @ Z3</td>
+          <td>~25 km</td>
+          <td>Semana de mayor calidad del plan.</td>
+        </tr>
+        <tr>
+          <td>S11</td>
+          <td>5 km Z2</td>
+          <td>3×1000m @ VO2máx + 600m rec</td>
+          <td>10 km con 2 km @ ritmo 10K</td>
+          <td>~24 km</td>
+          <td>Pico absoluto del plan. Exige buena nutrición.</td>
+        </tr>
+        <tr class="deload-row">
+          <td>S12 <span class="badge test">TEST</span></td>
+          <td>3 km Z2 muy suave</td>
+          <td>Strides suaves 6×100m</td>
+          <td>5K a esfuerzo máximo</td>
+          <td>~11 km</td>
+          <td>Taper completo. Test 5K final. Comparar con semana 1.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── METODOLOGÍA INTERVALOS / TEMPO ───────────────── -->
+  <section>
+    <h2>Intervalos vs Tempo</h2>
+    <div class="interval-blocks">
+      <div class="interval-card">
+        <div class="interval-phase">Semanas 1–4</div>
+        <div class="interval-title">Intervalos 800m @ Ritmo 5K</div>
+        <div class="interval-rows">
+          <div class="interval-row"><span class="label">Objetivo</span><span class="value">Economía de carrera</span></div>
+          <div class="interval-row"><span class="label">Recuperación</span><span class="value">400m caminando/trotando</span></div>
+          <div class="interval-row"><span class="label">Intensidad</span><span class="value">90–93% FCmáx</span></div>
+          <div class="interval-row"><span class="label">Por qué</span><span class="value">Adaptación neuromuscular</span></div>
+        </div>
+      </div>
+      <div class="interval-card">
+        <div class="interval-phase">Semanas 5–8</div>
+        <div class="interval-title">Tempo Continuo @ Umbral</div>
+        <div class="interval-rows">
+          <div class="interval-row"><span class="label">Objetivo</span><span class="value">Elevar umbral de lactato</span></div>
+          <div class="interval-row"><span class="label">Duración</span><span class="value">20–30 min sostenidos</span></div>
+          <div class="interval-row"><span class="label">Intensidad</span><span class="value">85–88% FCmáx</span></div>
+          <div class="interval-row"><span class="label">Por qué</span><span class="value">Mejora ritmo de 10K</span></div>
+        </div>
+      </div>
+      <div class="interval-card">
+        <div class="interval-phase">Semanas 9–11</div>
+        <div class="interval-title">Intervalos VO2máx 400–1000m</div>
+        <div class="interval-rows">
+          <div class="interval-row"><span class="label">Objetivo</span><span class="value">Potencia aeróbica máxima</span></div>
+          <div class="interval-row"><span class="label">Recuperación</span><span class="value">1:1 (igual al intervalo)</span></div>
+          <div class="interval-row"><span class="label">Intensidad</span><span class="value">95–98% FCmáx</span></div>
+          <div class="interval-row"><span class="label">Por qué</span><span class="value">Mejora techo aeróbico 5K</span></div>
+        </div>
+      </div>
+      <div class="interval-card">
+        <div class="interval-phase">Semana 12</div>
+        <div class="interval-title">Taper + Test</div>
+        <div class="interval-rows">
+          <div class="interval-row"><span class="label">Objetivo</span><span class="value">Frescar el sistema nervioso</span></div>
+          <div class="interval-row"><span class="label">Volumen</span><span class="value">−50% vs semana anterior</span></div>
+          <div class="interval-row"><span class="label">Intensidad</span><span class="value">Mantener, bajar volumen</span></div>
+          <div class="interval-row"><span class="label">Test</span><span class="value">5K máximo esfuerzo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRESERVAR MÚSCULO ──────────────────────────── -->
+  <section>
+    <h2>Preservar Músculo Durante el Plan</h2>
+    <div class="preserve-grid">
+      <div class="preserve-card">
+        <h4>🥩 Proteína</h4>
+        <ul>
+          <li>2.0–2.4 g/kg de peso corporal/día (150–185g diarios)</li>
+          <li>Distribuir en 4–5 tomas (cada 3–4h)</li>
+          <li>40–50g post-entreno de fuerza pesado</li>
+          <li>Caseína o comida alta en proteína antes de dormir</li>
+        </ul>
+      </div>
+      <div class="preserve-card">
+        <h4>🍞 Carbohidratos</h4>
+        <ul>
+          <li>No eliminar carbos en días de running de calidad</li>
+          <li>Pre-long run: 30–60g de carbs 60–90 min antes</li>
+          <li>Días de solo gimnasio: déficit moderado (−200–300 kcal)</li>
+          <li>Días de entrenamiento doble: calorías de mantenimiento</li>
+        </ul>
+      </div>
+      <div class="preserve-card">
+        <h4>😴 Recuperación</h4>
+        <ul>
+          <li>7–9h de sueño: el GH se secreta en sueño profundo</li>
+          <li>No pongas running de calidad + pierna el mismo día</li>
+          <li>Respetar las semanas de deload (son parte del plan)</li>
+          <li>Movilidad y stretching el domingo</li>
+        </ul>
+      </div>
+      <div class="preserve-card">
+        <h4>🏋️ Volumen de Gimnasio</h4>
+        <ul>
+          <li>No reducir el volumen de upper durante el plan</li>
+          <li>En semanas de pico de running, bajar 1–2 series de pierna</li>
+          <li>Priorizar RDL, prensa y sentadillas (relación fuerza/masa)</li>
+          <li>Mantener compound movements. Reducir accesorios si hay fatiga</li>
+        </ul>
+      </div>
+      <div class="preserve-card">
+        <h4>💊 Suplementación Básica</h4>
+        <ul>
+          <li>Creatina 3–5g/día (preserva masa y rendimiento)</li>
+          <li>Magnesio nocturno (calidad del sueño, recuperación muscular)</li>
+          <li>Vitamina D3 (función muscular, sistema inmune)</li>
+          <li>Cafeína pre-calidad: 3–6 mg/kg, 45 min antes</li>
+        </ul>
+      </div>
+      <div class="preserve-card">
+        <h4>⚡ Deficit Calórico</h4>
+        <ul>
+          <li>Máximo −300–400 kcal/día en fase de cut con este plan</li>
+          <li>Déficit mayor + running aumenta riesgo de catabolismo</li>
+          <li>Si la fuerza baja >10% en 2 semanas, come más</li>
+          <li>Trackear peso semanal (promedio 7 días, no día a día)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── OBJETIVOS ESPERADOS ───────────────────────── -->
+  <section>
+    <h2>Objetivos Esperados</h2>
+    <div class="targets">
+      <div class="target">
+        <div class="target-week">Semana 4</div>
+        <div class="target-value">9K</div>
+        <div class="target-desc">Long run confortable. Base aeróbica establecida.</div>
+      </div>
+      <div class="target">
+        <div class="target-week">Semana 6</div>
+        <div class="target-value">10K</div>
+        <div class="target-desc">Primera vez corriendo 10K completo a ritmo Z2.</div>
+      </div>
+      <div class="target">
+        <div class="target-week">Semana 8</div>
+        <div class="target-value">−60–90"</div>
+        <div class="target-desc">Mejora estimada en tu tiempo de 5K vs semana 1.</div>
+      </div>
+      <div class="target">
+        <div class="target-week">Semana 12</div>
+        <div class="target-value">−2–3'</div>
+        <div class="target-desc">Mejora total en 5K. Si estabas en 29', podrías llegar a 26–27'.</div>
+      </div>
+      <div class="target">
+        <div class="target-week">Semana 12</div>
+        <div class="target-value">10K</div>
+        <div class="target-desc">10K cómodo a ritmo sostenible sin sufrimiento.</div>
+      </div>
+      <div class="target">
+        <div class="target-week">Todo el plan</div>
+        <div class="target-value">0 kg</div>
+        <div class="target-desc">Pérdida de masa muscular. Mantenida con proteína y fuerza.</div>
+      </div>
+    </div>
+    <div class="info-block">
+      <strong>Progresión realista según ciencia:</strong> Corredores no especializados con una base de entrenamiento de fuerza suelen ver mejoras de 5K de 1.5–3 minutos en 10–12 semanas con un programa estructurado (Jones & Carter, 2000). Al tener una base muscular sólida, tu economía de carrera responde bien al entrenamiento de calidad aunque el volumen sea bajo. La clave está en la <strong>consistencia</strong>, no en el kilometraje.
+    </div>
+  </section>
+
+  <!-- ─── RECOMENDACIONES FINALES ────────────────────── -->
+  <section>
+    <h2>Recomendaciones Clave</h2>
+    <div class="preserve-grid">
+      <div class="preserve-card" style="border-left-color: var(--zone2)">
+        <h4 style="color:var(--zone2)">🎯 Hybrid Athlete Mindset</h4>
+        <ul>
+          <li>Tu ventaja es la fuerza muscular: mejor economía de carrera, más potencia</li>
+          <li>El running no destruye músculo si la proteína y el déficit son controlados</li>
+          <li>Prioriza el sueño sobre sesiones extras de cualquier tipo</li>
+          <li>Si la fatiga acumulada es alta, salta la Zona 2, no la calidad</li>
+        </ul>
+      </div>
+      <div class="preserve-card" style="border-left-color: var(--quality)">
+        <h4 style="color:var(--quality)">⚠️ Señales de Alarma</h4>
+        <ul>
+          <li>Fuerza en gym baja más de 10% en 2 semanas → come más</li>
+          <li>Dolor de espinilla o rodilla → para y evalúa</li>
+          <li>FC en reposo +5–8 bpm por 2 días → descansa, posible sobreentrenamiento</li>
+          <li>Fatiga mental crónica → reduce running antes que el gym</li>
+        </ul>
+      </div>
+      <div class="preserve-card" style="border-left-color: var(--longrun)">
+        <h4 style="color:var(--longrun)">📊 Métricas a Trackear</h4>
+        <ul>
+          <li>Ritmo en Zona 2 (debería mejorar con las semanas)</li>
+          <li>FC promedio en long run</li>
+          <li>Peso corporal (promedio semanal)</li>
+          <li>Rendimiento en sentadilla y press de banca (indicadores de salud muscular)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
