@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Nutricional · Atleta Híbrido Cut</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f0e;
+    --bg2: #131614;
+    --bg3: #1a1e1c;
+    --surface: #1f2421;
+    --surface2: #252b27;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8ede9;
+    --text2: #9aab9e;
+    --text3: #5e6e62;
+    --green: #4ade80;
+    --green2: #22c55e;
+    --green-dim: rgba(74,222,128,0.12);
+    --green-dim2: rgba(74,222,128,0.06);
+    --amber: #fbbf24;
+    --amber-dim: rgba(251,191,36,0.12);
+    --red: #f87171;
+    --red-dim: rgba(248,113,113,0.1);
+    --blue: #60a5fa;
+    --blue-dim: rgba(96,165,250,0.1);
+    --teal: #2dd4bf;
+    --teal-dim: rgba(45,212,191,0.1);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d1f14 0%, #0d0f0e 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(74,222,128,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  h1 span { color: var(--green); }
+
+  .header-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+  }
+
+  .meta-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-chip.green { background: var(--green-dim); border-color: rgba(74,222,128,0.2); color: var(--green); }
+
+  /* LAYOUT */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+
+  /* NAV TABS */
+  .tabs-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,15,14,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    margin: 0 -2rem 2.5rem;
+    padding: 0 2rem;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text3);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 14px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--text2); }
+
+  .tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label:first-child { margin-top: 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: var(--border2); }
+
+  .card.green { border-left: 3px solid var(--green); }
+  .card.amber { border-left: 3px solid var(--amber); }
+  .card.red   { border-left: 3px solid var(--red); }
+  .card.blue  { border-left: 3px solid var(--blue); }
+  .card.teal  { border-left: 3px solid var(--teal); }
+
+  .card.highlight-green {
+    background: var(--green-dim2);
+    border-color: rgba(74,222,128,0.2);
+  }
+
+  .card.highlight-amber {
+    background: rgba(251,191,36,0.05);
+    border-color: rgba(251,191,36,0.2);
+  }
+
+  .card-title {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .card-body {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .card-body strong { color: var(--text); font-weight: 500; }
+
+  /* MACRO GRID */
+  .macro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .macro-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  .macro-num {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .macro-label {
+    font-size: 12px;
+    color: var(--text2);
+    font-weight: 300;
+  }
+
+  .macro-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 3px;
+  }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 400;
+  }
+
+  .badge.green { background: var(--green-dim); color: var(--green); }
+  .badge.amber { background: var(--amber-dim); color: var(--amber); }
+  .badge.red   { background: var(--red-dim);   color: var(--red); }
+  .badge.blue  { background: var(--blue-dim);  color: var(--blue); }
+  .badge.teal  { background: var(--teal-dim);  color: var(--teal); }
+  .badge.gray  { background: var(--surface2);  color: var(--text3); border: 1px solid var(--border); }
+
+  /* DAY SELECTOR */
+  .day-selector {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .day-btn {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    padding: 6px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text3);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .day-btn:hover { color: var(--text2); border-color: var(--border2); }
+
+  .day-btn.active {
+    background: var(--green-dim);
+    border-color: rgba(74,222,128,0.3);
+    color: var(--green);
+  }
+
+  .day-content { display: none; }
+  .day-content.active { display: block; }
+
+  /* MEAL TABLE */
+  .meal-list { }
+
+  .meal-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .meal-row:last-child { border-bottom: none; }
+
+  .meal-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    padding-top: 2px;
+  }
+
+  .meal-name {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .star { color: var(--amber); font-size: 12px; }
+
+  .meal-detail {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .meal-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* CARB TABLE */
+  .carb-table { width: 100%; border-collapse: collapse; }
+
+  .carb-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .carb-table td {
+    font-size: 13px;
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text2);
+  }
+
+  .carb-table tr:last-child td { border-bottom: none; }
+
+  .carb-table tr:hover td { background: var(--surface2); }
+
+  .carb-num {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .carb-day-name {
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2px;
+    font-family: var(--display);
+    font-size: 13.5px;
+  }
+
+  /* PROGRESS / PHASES */
+  .phase-row {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .phase-row:last-child { border-bottom: none; }
+
+  .phase-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 9px;
+    background: var(--green-dim);
+    border: 1px solid rgba(74,222,128,0.2);
+    color: var(--green);
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 72px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .phase-title {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* SIGNALS */
+  .signal-group { margin-bottom: 1.5rem; }
+
+  .signal-row {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .signal-row:last-child { border-bottom: none; }
+
+  .signal-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .signal-dot.green { background: var(--green); box-shadow: 0 0 8px rgba(74,222,128,0.4); }
+  .signal-dot.amber { background: var(--amber); box-shadow: 0 0 8px rgba(251,191,36,0.4); }
+  .signal-dot.red   { background: var(--red);   box-shadow: 0 0 8px rgba(248,113,113,0.4); }
+
+  .signal-text {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .signal-text strong { color: var(--text); font-weight: 500; }
+
+  /* TIP BLOCKS */
+  .tip-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .tip-block.amber { background: rgba(251,191,36,0.04); border-color: rgba(251,191,36,0.15); }
+  .tip-block.green { background: var(--green-dim2); border-color: rgba(74,222,128,0.15); }
+  .tip-block.blue  { background: rgba(96,165,250,0.04); border-color: rgba(96,165,250,0.15); }
+  .tip-block.red   { background: rgba(248,113,113,0.04); border-color: rgba(248,113,113,0.15); }
+
+  .tip-header {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .tip-header.amber { color: var(--amber); }
+  .tip-header.green { color: var(--green); }
+  .tip-header.blue  { color: var(--blue); }
+  .tip-header.red   { color: var(--red); }
+
+  .tip-body {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .tip-body strong { color: var(--text); font-weight: 500; }
+
+  ul.tip-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul.tip-list li {
+    font-size: 13.5px;
+    color: var(--text2);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  ul.tip-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  ul.tip-list li:last-child { border-bottom: none; }
+  ul.tip-list li strong { color: var(--text); font-weight: 500; }
+
+  /* BAR CHART for carbos */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bar-row:last-child { border-bottom: none; }
+
+  .bar-label {
+    font-size: 12px;
+    color: var(--text2);
+    min-width: 130px;
+  }
+
+  .bar-wrap {
+    flex: 1;
+    background: var(--surface2);
+    border-radius: 3px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 8px;
+    border-radius: 3px;
+    background: var(--green);
+    transition: width 0.5s ease;
+  }
+
+  .bar-val {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 1.5rem; }
+    main { padding: 2rem 1rem; }
+    .tabs-wrap { margin: 0 -1rem 2rem; padding: 0 1rem; }
+    h1 { font-size: 28px; }
+    .macro-grid { grid-template-columns: 1fr 1fr; }
+    .meal-row { grid-template-columns: 50px 1fr; }
+  }
+
+  /* ANIMATIONS */
+  .tab-panel.active {
+    animation: fadeIn 0.25s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* UTILITY */
+  .mt { margin-top: 1rem; }
+  .mt2 { margin-top: 1.75rem; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media (max-width: 500px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-tag">Plan de definición · 10 semanas</div>
+    <h1>Atleta <span>Híbrido</span><br>Cut Nutricional</h1>
+    <p style="color: var(--text2); font-size: 14px; max-width: 560px;">Hipertrofia + HYROX + Running. Diseñado para 75–78 kg, ~17–18% grasa → 12–13%. Sin perder fuerza, rendimiento ni apariencia atlética.</p>
+    <div class="header-meta">
+      <span class="meta-chip green">~2,200–2,500 kcal/día</span>
+      <span class="meta-chip">175–185g proteína</span>
+      <span class="meta-chip">Carbos ciclados por día</span>
+      <span class="meta-chip">Post-workout real respetado ⭐</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="tabs-wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('macros')" role="tab">Macros base</button>
+      <button class="tab-btn" onclick="switchTab('carbdias')" role="tab">Carbos por día</button>
+      <button class="tab-btn" onclick="switchTab('ejemplos')" role="tab">Días de ejemplo</button>
+      <button class="tab-btn" onclick="switchTab('timing')" role="tab">Timing & Pre/Post</button>
+      <button class="tab-btn" onclick="switchTab('progresion')" role="tab">Progresión 10 sem</button>
+      <button class="tab-btn" onclick="switchTab('senales')" role="tab">Señales de control</button>
+      <button class="tab-btn" onclick="switchTab('estrategias')" role="tab">Estrategias</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 1: MACROS BASE
+  ════════════════════════════════════════ -->
+  <div id="tab-macros" class="tab-panel active">
+
+    <div class="section-label">Calorías según el tipo de día</div>
+    <div class="macro-grid">
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--green)">2,200</div>
+        <div class="macro-label">Upper / Pierna</div>
+        <div class="macro-sub">kcal · lun, mié, vie</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--amber)">2,450</div>
+        <div class="macro-label">Híbrido / Long run</div>
+        <div class="macro-sub">kcal · mar, jue, sáb</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--text3)">1,950</div>
+        <div class="macro-label">Descanso</div>
+        <div class="macro-sub">kcal · domingo</div>
+      </div>
+    </div>
+
+    <div class="card highlight-green" style="margin-top: 4px;">
+      <div class="card-body">
+        <strong>Lógica del déficit:</strong> ~300–400 kcal bajo tu TDEE en días de entreno, ~550–650 en descanso. Déficit semanal total: ~2,400–2,800 kcal → 0.3–0.5 kg de grasa/semana. Ritmo óptimo para preservar músculo siendo atleta híbrido.
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Distribución de macros (días de entreno)</div>
+    <div class="macro-grid">
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--green)">175–185g</div>
+        <div class="macro-label">Proteína</div>
+        <div class="macro-sub">~2.3–2.4 g/kg · constante</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--amber)">220–280g</div>
+        <div class="macro-label">Carbohidratos</div>
+        <div class="macro-sub">varía por tipo de día</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--teal)">55–65g</div>
+        <div class="macro-label">Grasas</div>
+        <div class="macro-sub">~0.8 g/kg · estable</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Sistema de porciones (sin báscula)</div>
+
+    <div class="card green">
+      <div class="card-title">🥩 Proteína — no cambia nunca</div>
+      <div class="card-body">1 palma grande por comida principal. Fuentes: pechuga, sirloin, pescado, huevo entero + claras, yogur bebible, proteína en polvo. La proteína alta es tu seguro anti-catabolismo durante todo el cut.</div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-title">🌾 Carbohidratos — se ajustan por día</div>
+      <div class="card-body">
+        <strong>Días de alta demanda</strong> (mar, jue, sáb): 1.25–1.5 tazas por comida sólida, más post-workout generoso.<br><br>
+        <strong>Días de fuerza</strong> (lun, mié, vie): 1 taza por comida, 2–3 comidas con almidón.<br><br>
+        <strong>Descanso</strong>: máximo 1–2 tazas en todo el día, sin almidón en la última comida.
+      </div>
+    </div>
+
+    <div class="two-col mt">
+      <div class="card blue">
+        <div class="card-title">🍎 Fruta</div>
+        <div class="card-body">2–3 porciones/día. Priorizar pre o post-entreno. Dátiles = carbo rápido, ideal pre-running e intra-run largo.</div>
+      </div>
+      <div class="card teal">
+        <div class="card-title">🫒 Grasas</div>
+        <div class="card-body">Estables. 2–3 huevos enteros, ¼ aguacate en 1 comida, aceite de oliva para cocinar. No subir en días de carbos altos.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Día de descanso (domingo)</div>
+    <div class="macro-grid">
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--green)">175–185g</div>
+        <div class="macro-label">Proteína</div>
+        <div class="macro-sub">sin cambios</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--text3)">140–160g</div>
+        <div class="macro-label">Carbohidratos</div>
+        <div class="macro-sub">mínimos, sin almidón nocturno</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color: var(--teal)">60–70g</div>
+        <div class="macro-label">Grasas</div>
+        <div class="macro-sub">ligeramente más</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 2: CARBOS POR DÍA
+  ════════════════════════════════════════ -->
+  <div id="tab-carbdias" class="tab-panel">
+
+    <div class="section-label">Carbohidratos diarios por tipo de sesión</div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Lunes</span><br><span style="font-size:11px; color:var(--text3);">Upper pesado + abdomen</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 74%; background: var(--green);"></div></div>
+        <div class="bar-val" style="color: var(--green);">220–240g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Martes</span><br><span style="font-size:11px; color:var(--text3);">Funcional HYROX + running Z2</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 90%; background: var(--amber);"></div></div>
+        <div class="bar-val" style="color: var(--amber);">260–280g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Miércoles</span><br><span style="font-size:11px; color:var(--text3);">Pierna pesada</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 80%; background: var(--green);"></div></div>
+        <div class="bar-val" style="color: var(--green);">230–250g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Jueves</span><br><span style="font-size:11px; color:var(--text3);">Intervalos / tempo + funcional</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 90%; background: var(--red);"></div></div>
+        <div class="bar-val" style="color: var(--red);">260–280g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Viernes</span><br><span style="font-size:11px; color:var(--text3);">Upper pesado + abdomen</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 74%; background: var(--green);"></div></div>
+        <div class="bar-val" style="color: var(--green);">220–240g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Sábado</span><br><span style="font-size:11px; color:var(--text3);">Long run zona 2</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 98%; background: var(--amber);"></div></div>
+        <div class="bar-val" style="color: var(--amber);">270–300g</div>
+      </div>
+      <div class="bar-row" style="padding: 14px 18px;">
+        <div class="bar-label"><span style="color: var(--text); font-weight:500;">Domingo</span><br><span style="font-size:11px; color:var(--text3);">Descanso</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width: 48%; background: var(--text3);"></div></div>
+        <div class="bar-val" style="color: var(--text3);">140–160g</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Racionalidad de cada día</div>
+
+    <div class="card green">
+      <div class="card-title">Lunes y Viernes — Upper pesado</div>
+      <div class="card-body">Carbos moderados-altos concentrados alrededor del entreno. Post-workout es la comida más densa en carbos del día. La cena puede tener una porción pequeña de almidón para recuperar.</div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-title">Martes y Jueves — Días híbridos</div>
+      <div class="card-body">Los días de más carbos de la semana junto con el sábado. Tienes running más funcional → doble demanda glucolítica. No recortes aquí aunque la semana se sienta pesada. <strong>Estos días son los más importantes para mantener rendimiento.</strong></div>
+    </div>
+
+    <div class="card green">
+      <div class="card-title">Miércoles — Pierna pesada</div>
+      <div class="card-body">Demanda glucolítica alta. Pre-entreno con almidón sólido obligatorio. No corras en ayunas este día. El almuerzo post-pierna puede ser el más abundante de los días de fuerza.</div>
+    </div>
+
+    <div class="card" style="border-left: 3px solid var(--amber);">
+      <div class="card-title">Sábado — Long run</div>
+      <div class="card-body"><strong>El día de más carbos de la semana.</strong> Importante: la cena del viernes ya debe ser ligeramente más densa en carbos (+20–30g). Intra-run: dátiles o geles desde los 50–60 min si el run supera esa duración.</div>
+    </div>
+
+    <div class="card" style="border-left: 3px solid var(--text3);">
+      <div class="card-title">Domingo — Descanso</div>
+      <div class="card-body">Día bajo en carbos. No es castigo. El almidón mínimo en el día de descanso mejora la sensibilidad a la insulina para la semana siguiente. Fruta, verduras y proteína alta. Sin arroz, avena ni pan en la cena.</div>
+    </div>
+
+    <div class="tip-block amber mt2">
+      <div class="tip-header amber">Regla práctica</div>
+      <div class="tip-body">¿El día tiene running rápido, HYROX o más de 60 min de actividad total? → Sube carbos. ¿Solo fuerza o descanso? → Baja carbos. La proteína <strong>nunca cambia</strong>.</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 3: DÍAS DE EJEMPLO
+  ════════════════════════════════════════ -->
+  <div id="tab-ejemplos" class="tab-panel">
+
+    <div class="day-selector">
+      <button class="day-btn active" onclick="switchDay('upper')">Lun · Upper</button>
+      <button class="day-btn" onclick="switchDay('hibrido')">Mar · Híbrido</button>
+      <button class="day-btn" onclick="switchDay('pierna')">Mié · Pierna</button>
+      <button class="day-btn" onclick="switchDay('intervalos')">Jue · Intervalos</button>
+      <button class="day-btn" onclick="switchDay('viernes')">Vie · Upper</button>
+      <button class="day-btn" onclick="switchDay('longrun')">Sáb · Long run</button>
+      <button class="day-btn" onclick="switchDay('descanso')">Dom · Descanso</button>
+    </div>
+
+    <!-- LUNES UPPER -->
+    <div id="day-upper" class="day-content active">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge green">Lunes · Upper pesado + abdomen</span>
+        <span class="badge gray">~2,200 kcal</span>
+        <span class="badge gray">~230g carbos</span>
+        <span class="badge gray">~180g proteína</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-entreno ligero</div>
+              <div class="meal-detail">1 plátano mediano + 2 dátiles + café solo. Comer 20–30 min antes. Rápido de digerir.</div>
+              <div class="meal-tags"><span class="badge amber">~35g carbos</span><span class="badge gray">rápida absorción</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">06:30</div>
+            <div>
+              <div class="meal-name">Entrena</div>
+              <div class="meal-detail">Upper pesado. Si dura más de 70 min, agua con electrolitos. Sin necesidad de intra-comida.</div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">08:00</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐ tu comida real</span></div>
+              <div class="meal-detail">1 scoop proteína + ½ taza avena seca (cocida o en frio) + plátano, mango o 2–3 dátiles. No cambies esto. Funciona y es tuyo.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~65g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">12:30</div>
+            <div>
+              <div class="meal-name">Almuerzo principal</div>
+              <div class="meal-detail">150–170g pechuga o sirloin + 1 taza arroz cocido + vegetales salteados o ensalada grande. Simple y efectivo.</div>
+              <div class="meal-tags"><span class="badge green">~45g proteína</span><span class="badge amber">~55g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">16:30</div>
+            <div>
+              <div class="meal-name">Snack tarde</div>
+              <div class="meal-detail">Yogur bebible natural (alto en proteína) + manzana o naranja. Rápido, sin cocinar.</div>
+              <div class="meal-tags"><span class="badge green">~20g proteína</span><span class="badge amber">~35g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena</div>
+              <div class="meal-detail">150g pescado o pollo + 3 claras + ensalada abundante + 2 tortillas o ½ taza arroz.</div>
+              <div class="meal-tags"><span class="badge green">~50g proteína</span><span class="badge amber">~30g carbos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARTES HÍBRIDO -->
+    <div id="day-hibrido" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge amber">Martes · Funcional HYROX + Running Z2</span>
+        <span class="badge gray">~2,450 kcal</span>
+        <span class="badge gray">~275g carbos</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-entreno sólido — no en ayunas este día</div>
+              <div class="meal-detail">Avena ½ taza cocida + 1 scoop proteína mezclado en la avena + plátano. Comer 40–50 min antes. Día doble = necesitas sustrato real.</div>
+              <div class="meal-tags"><span class="badge green">~35g proteína</span><span class="badge amber">~60g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">07:00</div>
+            <div>
+              <div class="meal-name">Sesión híbrida</div>
+              <div class="meal-detail">Funcional HYROX + running Z2. Si supera 75 min total, lleva 1–2 dátiles para intra. Agua con electrolitos obligatoria.</div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">09:00</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐ hoy más generoso</span></div>
+              <div class="meal-detail">1 scoop proteína + avena ½ taza seca + plátano + 2–3 dátiles extra. Sesión doble lo justifica.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~75g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">13:00</div>
+            <div>
+              <div class="meal-name">Almuerzo amplio</div>
+              <div class="meal-detail">170g sirloin o pollo + 1.25 tazas arroz o pasta + vegetales + frijoles ½ taza opcionales.</div>
+              <div class="meal-tags"><span class="badge green">~50g proteína</span><span class="badge amber">~70g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">17:00</div>
+            <div>
+              <div class="meal-name">Snack</div>
+              <div class="meal-detail">3 claras + 1 huevo revuelto con 2 tortillas. 5 minutos de preparación máximo.</div>
+              <div class="meal-tags"><span class="badge green">~25g proteína</span><span class="badge amber">~30g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:30</div>
+            <div>
+              <div class="meal-name">Cena</div>
+              <div class="meal-detail">150g pescado + ensalada grande + ½ taza arroz + yogur bebible de postre. Cena completa pero sin exceso.</div>
+              <div class="meal-tags"><span class="badge green">~45g proteína</span><span class="badge amber">~40g carbos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIÉRCOLES PIERNA -->
+    <div id="day-pierna" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge green">Miércoles · Pierna pesada</span>
+        <span class="badge gray">~2,250 kcal</span>
+        <span class="badge gray">~245g carbos</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-entreno obligatoriamente sólido</div>
+              <div class="meal-detail">Avena ½ taza cocida + 2 huevos revueltos rápidos + café. Pierna en ayunas = rendimiento caído y más catabolismo. No lo hagas.</div>
+              <div class="meal-tags"><span class="badge green">~28g proteína</span><span class="badge amber">~50g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">08:30</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐</span></div>
+              <div class="meal-detail">1 scoop proteína + avena ½ taza + plátano. Sin cambios. Pierna destruye glucógeno, este post es crítico.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~65g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">13:00</div>
+            <div>
+              <div class="meal-name">Almuerzo — el más sólido de la semana</div>
+              <div class="meal-detail">180g sirloin o carne + 1.25 tazas arroz + ½ taza frijoles + vegetales. Pierna necesita combustible para la recuperación.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~75g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">17:00</div>
+            <div>
+              <div class="meal-name">Snack — mereces un gusto</div>
+              <div class="meal-detail">Yogur bebible + arroz con leche pequeño (opcional). Es el día que más lo justifica. Entra dentro del plan.</div>
+              <div class="meal-tags"><span class="badge green">~18g proteína</span><span class="badge amber">~40g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena</div>
+              <div class="meal-detail">150g pollo + 3 claras + ensalada grande + 2 tortillas. Proteína alta, carbos moderados a esta hora.</div>
+              <div class="meal-tags"><span class="badge green">~50g proteína</span><span class="badge amber">~25g carbos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUEVES INTERVALOS -->
+    <div id="day-intervalos" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge red">Jueves · Intervalos/tempo + funcional ligero</span>
+        <span class="badge gray">~2,450 kcal</span>
+        <span class="badge gray">~275g carbos</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-entreno — obligatorio, nunca en ayunas</div>
+              <div class="meal-detail">2–3 dátiles + plátano pequeño + café. Los intervalos son zona 4–5. Sin glucosa disponible, el ritmo se cae y el estrés cortisol se dispara.</div>
+              <div class="meal-tags"><span class="badge amber">~45g carbos rápidos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">06:45</div>
+            <div>
+              <div class="meal-name">Sesión: intervalos/tempo + funcional</div>
+              <div class="meal-detail">Si es tempo largo (+40 min), lleva 1–2 dátiles adicionales. Intra-running en esfuerzo alto = normal y necesario.</div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">08:30</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐ hoy el más importante</span></div>
+              <div class="meal-detail">1 scoop proteína + avena generosa (¾ taza seca) + plátano + 2–3 dátiles. Máxima glucólisis del week → máxima recarga.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~80g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">13:00</div>
+            <div>
+              <div class="meal-name">Almuerzo</div>
+              <div class="meal-detail">150g pescado o pollo + 1.25 tazas arroz o pasta + vegetales + frijoles ½ taza.</div>
+              <div class="meal-tags"><span class="badge green">~50g proteína</span><span class="badge amber">~65g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">17:00</div>
+            <div>
+              <div class="meal-name">Snack</div>
+              <div class="meal-detail">Yogur bebible + fruta + 2 tortillas con huevo o claras rápido.</div>
+              <div class="meal-tags"><span class="badge green">~28g proteína</span><span class="badge amber">~45g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena ligera</div>
+              <div class="meal-detail">170g sirloin + ensalada grande + ½ taza arroz. Los carbos ya se usaron durante el día. Cena proteica sin exceso.</div>
+              <div class="meal-tags"><span class="badge green">~48g proteína</span><span class="badge amber">~25g carbos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIERNES UPPER -->
+    <div id="day-viernes" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge green">Viernes · Upper pesado + abdomen</span>
+        <span class="badge gray">~2,220 kcal</span>
+        <span class="badge green">+carga para long run del sábado</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-entreno</div>
+              <div class="meal-detail">Plátano + 2 dátiles + café. Igual que el lunes.</div>
+              <div class="meal-tags"><span class="badge amber">~35g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">08:00</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐</span></div>
+              <div class="meal-detail">1 scoop proteína + avena ½ taza + plátano. Sin cambios.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~65g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">12:30</div>
+            <div>
+              <div class="meal-name">Almuerzo</div>
+              <div class="meal-detail">150–170g pechuga o sirloin + 1 taza arroz + vegetales. Igual que lunes.</div>
+              <div class="meal-tags"><span class="badge green">~45g proteína</span><span class="badge amber">~55g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">17:00</div>
+            <div>
+              <div class="meal-name">Snack</div>
+              <div class="meal-detail">Yogur bebible + fruta. Rápido.</div>
+              <div class="meal-tags"><span class="badge green">~20g proteína</span><span class="badge amber">~35g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena — carga pre-long run</div>
+              <div class="meal-detail">150g pollo + 3 claras + <strong>1 taza arroz o pasta</strong> (más que de costumbre) + vegetales. Esta cena es la pre-carga del long run del sábado. Añade +20–30g carbos vs tu cena normal de viernes.</div>
+              <div class="meal-tags"><span class="badge green">~50g proteína</span><span class="badge amber">~55g carbos</span><span class="badge amber">pre-long run</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SÁBADO LONG RUN -->
+    <div id="day-longrun" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge amber">Sábado · Long run zona 2</span>
+        <span class="badge gray">~2,500 kcal</span>
+        <span class="badge gray">~290g carbos</span>
+        <span class="badge amber">día más alto de carbos</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">06:00</div>
+            <div>
+              <div class="meal-name">Pre-run (si corres pronto)</div>
+              <div class="meal-detail">Opción A (run corto &lt;50 min): puedes salir en ayunas con café, es zona 2. | Opción B (run largo 7K+): 1 plátano + 2–3 dátiles. Siempre agua antes.</div>
+              <div class="meal-tags"><span class="badge gray">según duración</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">intra</div>
+            <div>
+              <div class="meal-name">Intra-run (desde min 50–60)</div>
+              <div class="meal-detail">2–3 dátiles o 1 gel si tienes. No esperes a sentirte vacío. Cada 30–40 min en runs largos. Agua con pizca de sal si suda mucho.</div>
+              <div class="meal-tags"><span class="badge amber">~20–30g carbos intra</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">08:30</div>
+            <div>
+              <div class="meal-name">Post-workout <span class="star">⭐ máximo del week</span></div>
+              <div class="meal-detail">1 scoop proteína + avena ¾ taza seca + plátano + mango o dátiles. El post del sábado es el más grande del week. Tu sistema lo necesita.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~80g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">13:00</div>
+            <div>
+              <div class="meal-name">Almuerzo completo de recuperación</div>
+              <div class="meal-detail">180g sirloin o pollo + 1.5 tazas arroz + frijoles + vegetales. Almuerzo más grande de la semana. No te cortes hoy.</div>
+              <div class="meal-tags"><span class="badge green">~55g proteína</span><span class="badge amber">~80g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">17:00</div>
+            <div>
+              <div class="meal-name">Snack</div>
+              <div class="meal-detail">Yogur bebible + fruta o arroz con leche pequeño.</div>
+              <div class="meal-tags"><span class="badge green">~18g proteína</span><span class="badge amber">~40g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena moderada</div>
+              <div class="meal-detail">150g pescado + ensalada + ½ taza arroz. Cena normal, ya cargaste los carbos durante el día.</div>
+              <div class="meal-tags"><span class="badge green">~42g proteína</span><span class="badge amber">~25g carbos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMINGO DESCANSO -->
+    <div id="day-descanso" class="day-content">
+      <div style="display:flex; gap:10px; margin-bottom:1.25rem; flex-wrap:wrap; align-items:center;">
+        <span class="badge gray">Domingo · Descanso</span>
+        <span class="badge gray">~1,950 kcal</span>
+        <span class="badge gray">~150g carbos</span>
+        <span class="badge red">mínimo almidón</span>
+      </div>
+      <div class="card">
+        <div class="meal-list">
+          <div class="meal-row">
+            <div class="meal-time">08:00</div>
+            <div>
+              <div class="meal-name">Desayuno tranquilo</div>
+              <div class="meal-detail">3 huevos enteros + claras al gusto + 1–2 tortillas calentadas + fruta. Sin necesidad de avena ni carbo alto hoy.</div>
+              <div class="meal-tags"><span class="badge green">~35g proteína</span><span class="badge gray">~25g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">13:00</div>
+            <div>
+              <div class="meal-name">Almuerzo</div>
+              <div class="meal-detail">150–160g pollo o pescado + ½ taza arroz o frijoles + ensalada o verduras abundantes. Hoy la proteína es la estrella, los carbos son secundarios.</div>
+              <div class="meal-tags"><span class="badge green">~45g proteína</span><span class="badge gray">~45g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">16:30</div>
+            <div>
+              <div class="meal-name">Snack suave</div>
+              <div class="meal-detail">Yogur bebible + manzana o naranja. Sin procesar.</div>
+              <div class="meal-tags"><span class="badge green">~18g proteína</span><span class="badge gray">~35g carbos</span></div>
+            </div>
+          </div>
+          <div class="meal-row">
+            <div class="meal-time">20:00</div>
+            <div>
+              <div class="meal-name">Cena sin almidón</div>
+              <div class="meal-detail">150–170g sirloin o pescado + ensalada grande + aguacate ¼. Sin arroz, sin tortillas, sin avena. Solo proteína, grasa y fibra.</div>
+              <div class="meal-tags"><span class="badge green">~45g proteína</span><span class="badge gray">~10g carbos</span><span class="badge teal">grasa moderada</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-block green mt">
+        <div class="tip-header green">Por qué funciona</div>
+        <div class="tip-body">El día bajo en carbos del domingo no es un castigo. Mejora la sensibilidad a la insulina para toda la semana siguiente, lo que significa que los carbos del lunes se utilizan mejor. Además maximiza el déficit semanal sin tocar días de entrenamiento.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 4: TIMING PRE/POST
+  ════════════════════════════════════════ -->
+  <div id="tab-timing" class="tab-panel">
+
+    <div class="section-label">Pre-entreno según el tipo de sesión</div>
+
+    <div class="card amber">
+      <div class="card-title">Upper pesado (lun, vie) — ligero, 20–30 min antes</div>
+      <div class="card-body">Plátano + 2 dátiles + café. No necesitas avena completa. La sesión de fuerza upper no es tan glucolítica como los días híbridos.</div>
+    </div>
+
+    <div class="card red">
+      <div class="card-title">Intervalos/tempo (jue) — nunca en ayunas</div>
+      <div class="card-body">3 dátiles + plátano pequeño + café. 25–35 min antes. Los intervalos son zona 4–5. Sin carbos disponibles = ritmo caído + cortisol disparado + mal estímulo para adaptación aeróbica.</div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-title">Funcional HYROX + Z2 (mar) — sólido, 40–50 min antes</div>
+      <div class="card-body">Avena ½ taza + proteína + plátano. El día doble necesita sustrato desde antes. No experimentes con ayunas este día.</div>
+    </div>
+
+    <div class="card green">
+      <div class="card-title">Pierna pesada (mié) — sólido, 40–50 min antes</div>
+      <div class="card-body">Avena ½ taza + 2 huevos. Pierna en ayunas = menos glucógeno muscular = rendimiento comprometido desde el primer trabajo. Pre-entreno aquí es obligatorio.</div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Running en ayunas — cuándo sí, cuándo no</div>
+
+    <div class="two-col">
+      <div class="tip-block green">
+        <div class="tip-header green">Sí funciona en ayunas</div>
+        <div class="tip-body">
+          <ul class="tip-list" style="margin-top:0">
+            <li><strong>Zona 2 martes</strong> si no supera 45–50 min</li>
+            <li><strong>Long run sábado</strong> si no supera 50–55 min</li>
+            <li>Si llevas semanas adaptado a Z2</li>
+            <li>Con café + electrolitos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-block red">
+        <div class="tip-header red">Nunca en ayunas</div>
+        <div class="tip-body">
+          <ul class="tip-list" style="margin-top:0">
+            <li><strong>Intervalos / tempo (jue)</strong> siempre</li>
+            <li><strong>Pierna pesada (mié)</strong> siempre</li>
+            <li>Long runs 7K+ donde ya sabes que te vacías</li>
+            <li>Cuando llevas más de 4 días en déficit estricto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Post-workout — tu protocolo real ⭐</div>
+
+    <div class="card highlight-green">
+      <div class="card-title" style="color: var(--green);">1 scoop proteína + avena + fruta/dátiles — esto se queda</div>
+      <div class="card-body">
+        Este post-workout ya está bien diseñado. Proteína de rápida digestión + carbohidrato mixto (avena = lento, fruta/dátiles = rápido) = ventana anabólica bien aprovechada. No lo cambies.<br><br>
+        <strong>Ajuste por día:</strong><br>
+        · Upper o pierna: ½ taza avena seca + plátano o mango<br>
+        · Días híbridos / intervalos: ½–¾ taza avena + plátano + 2–3 dátiles<br>
+        · Long run: ¾ taza avena + plátano + mango o 4 dátiles<br><br>
+        <strong>Timing:</strong> Dentro de los 30–45 min post-sesión. No tienes que obsesionarte con los 30 min exactos, pero no dejes pasar 90 min.
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Long run — protocolo completo</div>
+
+    <div class="card" style="border-left: 3px solid var(--amber);">
+      <div class="card-body">
+        <strong>Noche anterior (viernes):</strong> +20–30g carbos en la cena (arroz o pasta extra).<br><br>
+        <strong>Mañana del run:</strong> Si supera 50 min → plátano + 2 dátiles antes. Si es más corto, puedes salir en ayunas.<br><br>
+        <strong>Intra-run (desde min 50–60):</strong> 2–3 dátiles cada 30–35 min. Agua con electrolitos. No esperes a sentirte sin energía.<br><br>
+        <strong>Post-run inmediato:</strong> Proteína + avena ¾ taza + fruta abundante. El más grande del week.<br><br>
+        <strong>Almuerzo del sábado:</strong> El más sólido de toda la semana, sin restricción.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 5: PROGRESIÓN 10 SEMANAS
+  ════════════════════════════════════════ -->
+  <div id="tab-progresion" class="tab-panel">
+
+    <div class="section-label">Fases del cut — 10 semanas</div>
+
+    <div class="card" style="padding: 0.5rem 0; overflow: hidden;">
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 1–2</div>
+        <div>
+          <div class="phase-title">Adaptación — déficit suave</div>
+          <div class="phase-desc">Calorías base según las tablas. No ajustes todavía nada. Tu cuerpo necesita 2 semanas para adaptarse al déficit siendo atleta activo. Establece peso semanal de referencia (promedio de 3 medidas, misma hora, mismo día).</div>
+        </div>
+      </div>
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 3–4</div>
+        <div>
+          <div class="phase-title">Déficit activo — primera evaluación</div>
+          <div class="phase-desc">Evalúa: ¿bajaste 0.3–0.5 kg? Si sí, mantén. Si no bajaste nada, baja 100–150 kcal del descanso dominical. Si bajaste más de 0.7 kg, sube 100 kcal en los días híbridos. Nunca toques las calorías de los días duros primero.</div>
+        </div>
+      </div>
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 5–6</div>
+        <div>
+          <div class="phase-title">Meseta esperada — primer ajuste</div>
+          <div class="phase-desc">Es normal que el progreso se detenga aquí. No entres en pánico. Reduce 100–150 kcal adicionales en el día de descanso. También puedes reducir ligeramente el almuerzo de los días upper (–½ taza arroz). Nunca ajustes días híbridos ni long run.</div>
+        </div>
+      </div>
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 7</div>
+        <div>
+          <div class="phase-title">Semana de recarga (refeed)</div>
+          <div class="phase-desc">Sube carbos +40–50g en TODOS los días de la semana 7. No es trampa, es estrategia. Resetea leptina, mejora rendimiento y estado mental. La semana siguiente el déficit funciona mejor. Proteína y grasas sin cambios. El refeed dura 5–7 días.</div>
+        </div>
+      </div>
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 8–9</div>
+        <div>
+          <div class="phase-title">Déficit final — los últimos kilos</div>
+          <div class="phase-desc">Vuelves al déficit post-refeed. El cuerpo responde mejor. Aquí puedes ser más preciso: reduce 100 kcal más del descanso y del snack de tarde en días de fuerza. Los días híbridos y long run se mantienen intactos siempre.</div>
+        </div>
+      </div>
+      <div class="phase-row" style="padding: 14px 18px;">
+        <div class="phase-tag">Sem 10</div>
+        <div>
+          <div class="phase-title">Pico y evaluación final</div>
+          <div class="phase-desc">Semana de transición. Sube carbos gradualmente hacia mantenimiento. Evalúa grasa corporal (visual + cinta). Si llegaste al objetivo: mantén. Si quieres continuar: toma 2 semanas de mantenimiento antes de otra fase de cut.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Reglas de ajuste durante las 10 semanas</div>
+
+    <div class="two-col">
+      <div class="tip-block green">
+        <div class="tip-header green">Orden para bajar calorías</div>
+        <ul class="tip-list">
+          <li>1°: Snack tarde (–100 kcal)</li>
+          <li>2°: Cena dominical</li>
+          <li>3°: Almuerzo días upper</li>
+          <li>4°: Almuerzo días pierna</li>
+          <li>Nunca: Post-workout, días híbridos, long run</li>
+        </ul>
+      </div>
+      <div class="tip-block amber">
+        <div class="tip-header amber">Señales para no bajar más</div>
+        <ul class="tip-list">
+          <li>Fuerza bajando semana a semana</li>
+          <li>5K o pace claramente peor</li>
+          <li>Hambre constante, no solo un día</li>
+          <li>Sueño perturbado sistemáticamente</li>
+          <li>Apariencia plana incluso post-comida</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-block blue mt">
+      <div class="tip-header blue">Velocidad de pérdida objetivo</div>
+      <div class="tip-body">
+        <strong>0.3–0.5 kg/semana</strong> = perfecto para atleta híbrido. Más rápido = pierdes músculo y rendimiento. Más lento = sal del déficit por 1–2 semanas de mantenimiento para resetear y vuelve. En 10 semanas a este ritmo: 3–5 kg de grasa real, manteniendo músculo y fuerza.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 6: SEÑALES DE CONTROL
+  ════════════════════════════════════════ -->
+  <div id="tab-senales" class="tab-panel">
+
+    <div class="section-label">El déficit está funcionando bien</div>
+    <div class="card">
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Peso promedio bajando 0.3–0.5 kg/semana</strong> (mide 3 veces por semana, misma hora, saca promedio)</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Apariencia más definida sin sentirte "plano"</strong>. Los pumps en el gym se mantienen, la vascularidad mejora.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Energía estable en los entrenamientos</strong>. Puedes completar la sesión sin caídas brutales de rendimiento.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Fuerza igual o ligeramente menor</strong> en movimientos principales. Pequeñas bajadas son normales; no caídas dramáticas.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Running mejorando o igual</strong>. Tu 5K no debería empeorar si los carbos de los días de running están bien.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot green"></div>
+        <div class="signal-text"><strong>Hambre manejable</strong>, no constante ni obsesiva. Si tienes hambre real después de cenar cada noche, algo está mal.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Señales de que estás perdiendo músculo</div>
+    <div class="card">
+      <div class="signal-row">
+        <div class="signal-dot red"></div>
+        <div class="signal-text"><strong>Fuerza cayendo semana a semana en ejercicios base</strong> (press, remo, sentadilla). No en un día malo; en la tendencia.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot red"></div>
+        <div class="signal-text"><strong>Te ves plano incluso después de comer bien</strong>. Sin pump, sin llenura muscular. Los músculos se ven vacíos.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot red"></div>
+        <div class="signal-text"><strong>Pérdida de peso &gt;0.8 kg/semana sostenida</strong>. No es todo grasa a ese ritmo.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot red"></div>
+        <div class="signal-text"><strong>Cansancio en los días de descanso</strong>. Si el domingo te sientes agotado sin haber entrenado, el volumen calórico es demasiado bajo.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot red"></div>
+        <div class="signal-text"><strong>Running significativamente más lento sin razón</strong> o fatiga muscular extrema en Z2 que debería ser fácil.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Necesitas más carbohidratos</div>
+    <div class="card">
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>Running en intervalos se siente imposible</strong> (no solo difícil). El ritmo colapsa a los 10 min.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>Long run te deja completamente destruido</strong> al día siguiente, no solo fatigado. Señal de glucógeno insuficiente.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>Niebla mental o irritabilidad sistemática</strong> por las mañanas, sobre todo en semanas de entreno duro.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>Antojo excesivo de dulce</strong> o carbohidratos procesados como señal de alerta. Tu cuerpo pide glucosa.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Necesitas bajar más calorías</div>
+    <div class="card">
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>El peso promedio semanal no bajó en 3 semanas seguidas</strong> y todos los otros indicadores están bien (no te sientes vacío, tienes fuerza).</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-dot amber"></div>
+        <div class="signal-text"><strong>No sientes ningún tipo de hambre</strong> durante el día, ni siquiera antes de comer. El déficit puede ser insuficiente.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB 7: ESTRATEGIAS HÍBRIDAS
+  ════════════════════════════════════════ -->
+  <div id="tab-estrategias" class="tab-panel">
+
+    <div class="section-label">Mantener rendimiento en el cut</div>
+
+    <div class="card green">
+      <div class="card-title">Carbos siempre rodeando el entrenamiento</div>
+      <div class="card-body">El mayor error del cut es bajar carbos uniformemente. La clave es distribuirlos: altos antes y después de los entrenamientos más exigentes, bajos en momentos de menor demanda (tarde del día de descanso, cena tardía).</div>
+    </div>
+
+    <div class="card amber">
+      <div class="card-title">Proteína absurdamente alta — no es negociable</div>
+      <div class="card-body">175–185g/día es tu escudo anti-catabolismo. Con esta cantidad siendo atleta híbrido, tu cuerpo tiene suficiente sustrato para mantener músculo incluso en déficit. Si algo baja, bajan los carbos o las grasas. La proteína nunca.</div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">Electrolitos y agua — subestimado en cuts</div>
+      <div class="card-body">En déficit, los riñones excretan más sodio. Esto causa fatiga, calambres y rendimiento caído. Añade sal a las comidas sin miedo, especialmente los días de running. Agua: mínimo 3–3.5L en días de entreno. Los pumps también dependen de esto.</div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Control del hambre</div>
+
+    <div class="card">
+      <div class="card-body">
+        <ul class="tip-list">
+          <li><strong>Volumen de comida con fibra</strong>: ensaladas grandes, vegetales al vapor, caldo de pollo llenan sin sumar carbos relevantes. Tu mayor aliado.</li>
+          <li><strong>Proteína + grasa en el desayuno</strong> los días de descanso: huevos enteros + aguacate amortiguan el hambre mucho mejor que carbos solos.</li>
+          <li><strong>Yogur bebible como snack</strong> es perfectamente estratégico: proteína líquida de digestión rápida que calma el hambre sin mucho costo calórico.</li>
+          <li><strong>Café negro</strong> como supresor de hambre antes de entrenar en ayunas. No lo evites.</li>
+          <li><strong>Fruta entera > zumo</strong>: la fibra de la fruta entera frena la digestión y mantiene la saciedad más tiempo. Nunca zumos.</li>
+          <li><strong>Si el hambre nocturna es consistente</strong>: mueve 100 kcal del almuerzo a la cena durante 1–2 semanas a ver si mejora.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Mantener pumps y apariencia atlética</div>
+
+    <div class="card blue">
+      <div class="card-title">Carbos peri-entreno = llenura muscular</div>
+      <div class="card-body">La apariencia "llena y atlética" que buscas depende del glucógeno muscular. Si tus pumps desaparecen y te ves plano, el problema casi siempre es haber cortado carbos demasiado rápido o haberte saltado el pre/post-workout. Tu post-workout con avena + fruta es exactamente lo correcto para esto.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="tip-block teal">
+        <div class="tip-header teal">Creatina durante el cut</div>
+        <div class="tip-body">5g/día diarios sin ciclos. Ayuda a mantener fuerza, retiene agua intracelular (llenura muscular) y mejora recuperación. No interfiere con el cut si el déficit es real.</div>
+      </div>
+      <div class="tip-block green">
+        <div class="tip-header green">Sodio estratégico</div>
+        <div class="tip-body">No temas al sodio peri-entreno. Pre y post-workout con sal normal = mejor hidratación celular = mejor pump. La retención de agua superficial no es lo mismo que músculo lleno.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Recuperación específica para atleta híbrido</div>
+
+    <div class="card">
+      <div class="card-body">
+        <ul class="tip-list">
+          <li><strong>Dormir es el macro que no puedes suplementar</strong>: 7.5–8.5h. En corte, la falta de sueño eleva grelina (hambre), cortisol (catabolismo) y reduce la oxidación de grasa. Prioridad máxima.</li>
+          <li><strong>El día de descanso (domingo) es parte del plan</strong>, no un problema. No lo uses para cardio extra, caminatas largas ni "quemar algo más". Recuperación activa ligera máximo: 20 min caminata.</li>
+          <li><strong>Proteína en la última comida</strong> del día (aunque sea pequeña): 30–40g antes de dormir mejora síntesis proteica nocturna. Yogur bebible o claras son opciones perfectas.</li>
+          <li><strong>Entre días consecutivos duros</strong> (mié pierna → jue intervalos): prioriza el almuerzo del miércoles como la mejor comida de recuperación de la semana.</li>
+          <li><strong>Fatiga acumulada en semana 5–6</strong>: es normal y esperada. No ajustes el entreno, sí considera la semana de recarga calórica.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 2rem;">Filosofía para los 10 km</div>
+
+    <div class="tip-block blue">
+      <div class="tip-header blue">Running mejora con el cut, si lo alimentas bien</div>
+      <div class="tip-body">
+        Tu 5K y la progresión hacia 10K van a mejorar durante el cut si respetas los carbos en los días de running. Menos peso corporal + misma o mejor potencia aeróbica = pace más rápido. El error es cortar carbos los días de running pensando que "quemas más grasa". En Z2 sí quemas grasa, pero necesitas glucógeno disponible para el funcional previo y para los intervalos del jueves. La adaptación aeróbica para llegar al 10K ocurre con consistencia + nutrición adecuada, no a pesar del déficit sino junto a él.
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer style="border-top: 1px solid var(--border); padding: 2rem; text-align: center; margin-top: 3rem;">
+  <p style="font-family: var(--mono); font-size: 11px; color: var(--text3); letter-spacing: 0.06em;">PLAN NUTRICIONAL HÍBRIDO · CUT 10 SEMANAS · HIPERTROFIA + HYROX + RUNNING</p>
+  <p style="font-size: 12px; color: var(--text3); margin-top: 6px;">Este plan es una guía práctica basada en principios de nutrición deportiva para atletas híbridos. Ajusta según tus señales individuales.</p>
+</footer>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function switchDay(name) {
+    document.querySelectorAll('.day-content').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('day-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>
