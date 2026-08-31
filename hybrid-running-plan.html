@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan Running Híbrido — 12 Semanas</title>
+<title>Plan Running Híbrido — Fase 2: 15K Build</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -438,6 +438,23 @@
     margin-top: 12px;
   }
   .info-block strong { color: var(--text); }
+  .phase-switch { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 30px; }
+  .phase-switch button { cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); padding:9px 13px; font:500 11px 'DM Mono', monospace; letter-spacing:.06em; text-transform:uppercase; }
+  .phase-switch button.active { background:var(--accent); border-color:var(--accent); color:#111; }
+  .phase-panel { display:none; } .phase-panel.active { display:block; }
+  .phase2-dashboard { display:grid; grid-template-columns:repeat(4,minmax(130px,1fr)); gap:10px; margin:0 0 24px; }
+  .dash-card { background:var(--card); border:1px solid var(--border); padding:14px; }
+  .dash-label { display:block; color:var(--muted); font:10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+  .dash-value { display:block; color:var(--accent); font:28px 'Bebas Neue',sans-serif; line-height:1.1; margin-top:6px; }
+  .phase2-nav { display:flex; flex-wrap:wrap; gap:5px; margin:0 0 18px; }
+  .phase2-nav button { cursor:pointer; background:var(--card); color:var(--text); border:1px solid var(--border); padding:7px 11px; font:11px 'DM Mono',monospace; }
+  .phase2-nav button.active { background:var(--accent2); color:white; border-color:var(--accent2); }
+  .phase2-week { display:none; } .phase2-week.active { display:block; }
+  .phase2-week h3 { color:var(--accent); font-size:17px; }
+  .session-detail { background:var(--card); border:1px solid var(--border); padding:16px; margin:10px 0; }
+  .session-detail h4 { color:var(--text); font-size:14px; margin-bottom:5px; }
+  .session-detail p { color:var(--muted); font-size:13px; }
+  @media (max-width:600px) { .phase2-dashboard { grid-template-columns:repeat(2,1fr); } }
 
   /* ─── RESPONSIVE ──────────────────────────────────── */
   @media (max-width: 600px) {
@@ -450,7 +467,7 @@
 <body>
 
 <header>
-  <div class="tag">Hybrid Athlete Protocol · 12 Semanas</div>
+  <div class="tag">Fase 2 · Hybrid Athlete Protocol · 12 Semanas</div>
   <h1>PLAN DE<br><span>RUNNING</span><br>HÍBRIDO</h1>
   <div class="header-meta">
     <div class="meta-item">
@@ -459,11 +476,11 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Fase</span>
-      <span class="meta-value">Bulk → Definición</span>
+      <span class="meta-value">Hipertrofia + resistencia</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Objetivo</span>
-      <span class="meta-value">5K PR + 10K cómodo</span>
+      <span class="meta-value">15K preparado</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Sesiones running</span>
@@ -473,6 +490,11 @@
 </header>
 
 <main>
+  <div class="phase-switch" aria-label="Seleccionar fase">
+    <button type="button" onclick="showPhase('phase2')" class="active">Fase 2 — Actual</button>
+    <button type="button" onclick="showPhase('phase1')">Fase 1 — Completada</button>
+  </div>
+  <div id="phase1" class="phase-panel">
 
   <!-- ─── FUNDAMENTO CIENTÍFICO ─────────────────────── -->
   <section>
@@ -956,7 +978,43 @@
     </div>
   </section>
 
+  </div>
+  <div id="phase2" class="phase-panel active">
+    <section>
+      <h2>Fase 2 — Hybrid + 15K Build</h2>
+      <p style="color:var(--muted);margin-bottom:18px">Evolución de la Fase 1: 3 carreras, 2 exposiciones HYROX y prioridad real a la hipertrofia. Los ritmos se controlan por RPE/FC hasta recalibrar con un test de 5K controlado en S1; no se reutilizan ritmos antiguos por defecto.</p>
+      <div class="phase2-dashboard"><div class="dash-card"><span class="dash-label">Semana actual</span><span id="runWeek" class="dash-value">S1</span></div><div class="dash-card"><span class="dash-label">Bloque</span><span id="runBlock" class="dash-value">Base</span></div><div class="dash-card"><span class="dash-label">Km previstos</span><span id="runKm" class="dash-value">25</span></div><div class="dash-card"><span class="dash-label">Siguiente</span><span class="dash-value">Martes</span></div></div>
+      <div class="info-block"><strong>Regla de fatiga:</strong> jueves llega después de pierna pesada: si hay dolor muscular o técnica alterada, cambia la calidad por 35–45 min Z2 + 4 strides. El sábado el HYROX es de baja carga excéntrica y se deja a RPE 6–7 para proteger el long run.</div>
+    </section>
+    <section><h2>Progresión de Running</h2><div id="runWeekNav" class="phase2-nav"></div><div id="runWeekContent"></div></section>
+    <section><h2>Upper / Lower — Prioridad Hipertrofia</h2>
+      <div class="session-detail"><h4>Lunes — Upper A</h4><p>Press inclinado en máquina 4×6–10 (1–2 RIR) · Jalón al pecho bilateral 4×8–12 · Remo apoyado 3×8–12 · Press hombro 3×8–10 · Elevación lateral unilateral en polea 4×12–20/lado · posterior 3×12–20 · bíceps + tríceps 3×10–15.</p></div>
+      <div class="session-detail"><h4>Miércoles — Pierna pesada</h4><p>Sentadilla o prensa 4×6–10 · RDL 3×6–10 · extensión de cuádriceps 2–3×10–15 · curl femoral 3×10–15 · glúteo 2×8–12 · pantorrilla 4×8–15 · abdomen 3 series. En S7, S10 y S11 quita 1 serie de prensa y RDL si el long run se siente comprometido.</p></div>
+      <div class="session-detail"><h4>Viernes — Upper B</h4><p>Press inclinado máquina o mancuernas 3×8–12 · <strong>jalón unilateral al pecho</strong> 3×10–12/lado · remo con énfasis dorsal 3×8–12 · elevación lateral unilateral en polea 4×12–20/lado · posterior 3×12–20 · bíceps + tríceps 3×10–15 · abdomen 3 series.</p></div>
+      <div class="info-block"><strong>Progresión:</strong> doble progresión: al alcanzar el extremo alto del rango en todas las series con el RIR prescrito, sube la mínima carga posible. En S4 y S8 reduce 35–40% las series; en S12 conserva 2 series por movimiento y no busques récords.</div>
+    </section>
+    <section><h2>Seguimiento</h2><div class="info-block"><strong>Registro sugerido por sesión:</strong> running: km, tiempo, ritmo, FC, RPE y notas; HYROX: carga, rondas, tiempo, distancia y RPE; gym: carga, reps, series, RIR y notas. Esta versión no introduce almacenamiento nuevo ni elimina datos: el HTML anterior tampoco almacenaba registros.</div></section>
+  </div>
 </main>
 
+<script>
+const runWeeks=[
+['Base + calibración','25','6 km Z2, RPE 3–4','2 km cal + 20 min “controlado duro” RPE 7 + 2 km enfriar','10 km Z2','Mantén el tempo estable; si deseas, test 5K controlado al final de la semana, no a muerte.'],
+['Base','27','6.5 km Z2','2 km cal + 3×8 min umbral RPE 7 (2 min trote) + 2 km','11 km Z2','Primera acumulación; martes HYROX RPE ≤7.'],
+['Base','29','7 km Z2','2 km cal + 4×1 km a ritmo 10K/15K RPE 7–8 (2 min trote) + 2 km','12 km Z2','Último long run cómodo del bloque.'],
+['Deload','20','5 km Z2','2 km cal + 6×1 min alegre / 90 s suave + 2 km','8 km Z2','−30% volumen; técnica, sueño y movilidad.'],
+['Build','30','7 km Z2','2 km cal + 2×12 min umbral RPE 7 (3 min trote) + 2 km','13 km Z2','Reinicia con control; no persigas el ritmo de otra persona.'],
+['Build','32','7.5 km Z2','2 km cal + 5×1 km a ritmo 10K RPE 8 (2 min trote) + 2 km','14 km Z2','Nutrición e hidratación durante long run >75 min.'],
+['Build','34','8 km Z2','2 km cal + 3×10 min a ritmo 15K RPE 7 (3 min trote) + 2 km','14 km: últimos 3 km RPE 5–6','Pico de construcción; baja 1 serie de pierna si hace falta.'],
+['Deload','23','6 km Z2','2 km cal + 20 min fartlek 1 min vivo/2 min suave + 2 km','10 km Z2','Recupera antes del bloque específico.'],
+['Específico 15K','34','8 km Z2','2 km cal + 4×1.5 km a ritmo 15K RPE 7–8 (2 min trote) + 2 km','14 km Z2','En HYROX empieza la exposición específica, no una carrera.'],
+['Específico 15K','36','8 km Z2','2 km cal + 2×20 min a ritmo 15K RPE 7 (4 min trote) + 2 km','15 km Z2','Primer 15K: muy controlado, objetivo es acabar con buena técnica.'],
+['Específico 15K','35','7 km Z2','2 km cal + 6×800 m RPE 8 (90 s trote) + 2 km','13 km con 5 km centrales a ritmo 15K','Calidad sin llegar al fallo; HYROX compacto.'],
+['Taper + 15K','22','5 km Z2 + 4 strides','4 km suave + 3×3 min ritmo 15K / 2 min suave','15K continuo: RPE 6–7','Reduce gym y HYROX; esta es la prueba de preparación, no un sprint.']
+];
+function renderRunWeek(n){const w=runWeeks[n-1];document.getElementById('runWeek').textContent='S'+n;document.getElementById('runBlock').textContent=w[0];document.getElementById('runKm').textContent=w[1];document.getElementById('runWeekContent').innerHTML=`<div class="phase2-week active"><h3>Semana ${n} — ${w[0]} <span class="badge ${w[0].includes('Deload')?'deload':'test'}">${w[0].includes('Deload')?'DELOAD':n===12?'15K':'BUILD'}</span></h3><div class="session-detail"><h4>Martes — Easy/Z2</h4><p>${w[2]}. Después del HYROX principal o separado 4–6 h. Conversacional; FC Z2.</p></div><div class="session-detail"><h4>Jueves — Calidad + core ligero</h4><p>${w[3]}. Antes: 10–15 min de core anti-rotación/anti-extensión, sin fatigar piernas.</p></div><div class="session-detail"><h4>Sábado — Long run</h4><p>${w[4]}. HYROX técnico y corto antes, o sepáralo; si se acumula fatiga, prioriza el long run.</p></div><div class="info-block"><strong>Clave:</strong> ${w[5]}</div></div>`;document.querySelectorAll('#runWeekNav button').forEach((b,i)=>b.classList.toggle('active',i===n-1));}
+document.getElementById('runWeekNav').innerHTML=runWeeks.map((w,i)=>`<button onclick="renderRunWeek(${i+1})" class="${i===0?'active':''}">S${i+1}${w[0].includes('Deload')?' ↓':''}</button>`).join('');renderRunWeek(1);
+function showPhase(id){document.querySelectorAll('.phase-panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.phase-switch button').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(id==='phase2'?'fase 2':'fase 1')));window.scrollTo({top:0,behavior:'smooth'});}
+</script>
 </body>
 </html>
