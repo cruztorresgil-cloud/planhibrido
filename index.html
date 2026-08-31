@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programa Híbrido HYROX — 12 Semanas</title>
+<title>Programa Híbrido HYROX — Fase 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -545,6 +545,14 @@
   /* hidden week content */
   .week-content { display: none; }
   .week-content.visible { display: block; }
+  .phase-switch { display:flex; gap:7px; flex-wrap:wrap; margin:0 0 28px; }
+  .phase-switch button { cursor:pointer; border:2px solid var(--border); background:var(--card); color:var(--muted); padding:8px 12px; font:700 13px 'Barlow Condensed',sans-serif; letter-spacing:.05em; text-transform:uppercase; }
+  .phase-switch button.active { background:var(--dark); border-color:var(--dark); color:var(--bg); }
+  .phase-panel { display:none; } .phase-panel.active { display:block; }
+  .phase-kpis { display:grid; grid-template-columns:repeat(4,minmax(125px,1fr)); gap:2px; background:var(--dark); border:2px solid var(--dark); margin-bottom:24px; }
+  .phase-kpi { background:var(--card); padding:14px 16px; }.phase-kpi span{display:block;font:9px 'Roboto Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.phase-kpi strong{display:block;font:26px 'Barlow Condensed',sans-serif;color:var(--accent);margin-top:4px}
+  .phase2-week { display:none; }.phase2-week.active{display:block}.phase2-note{background:var(--surface);border:1px solid var(--border);padding:13px 15px;font-size:12.5px;color:var(--mid);margin-top:10px}
+  @media(max-width:600px){.phase-kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -553,11 +561,11 @@
   <div class="tag-row">
     <span class="tag red">Martes</span>
     <span class="tag blue">Jueves</span>
-    <span class="tag">12 Semanas · Hybrid Athlete</span>
+    <span class="tag">Fase 2 · 12 Semanas</span>
     <span class="tag">2 Sesiones / Semana</span>
   </div>
   <h1>PROGRAMA<br><em>HÍBRIDO</em><br>FUNCIONAL</h1>
-  <p class="header-sub">Entrenamiento HYROX-style diseñado para atletas híbridos. Potencia aeróbica, fuerza funcional y agilidad atlética sin interferir con la hipertrofia ni el running.</p>
+  <p class="header-sub">Fase 2: progresión HYROX diseñada para acompañar el build hacia 15K y conservar prioridad de hipertrofia. Volumen, densidad y carga suben con intención; sin saltos al cajón.</p>
   <div class="header-stats">
     <div class="stat">
       <div class="stat-label">Perfil</div>
@@ -579,6 +587,8 @@
 </header>
 
 <main>
+  <div class="phase-switch" aria-label="Seleccionar fase"><button type="button" class="active" onclick="showPhase('phase2')">Fase 2 — Actual</button><button type="button" onclick="showPhase('phase1')">Fase 1 — Completada</button></div>
+  <div id="phase1" class="phase-panel">
 
   <!-- ── FILOSOFÍA ──────────────────────────────────── -->
   <section>
@@ -1608,6 +1618,19 @@
     </div>
   </section>
 
+  </div>
+  <div id="phase2" class="phase-panel active">
+    <section>
+      <h2><span class="h2-num">01</span> Fase 2 — HYROX Progression</h2>
+      <div class="phase-kpis"><div class="phase-kpi"><span>Semana actual</span><strong id="hyroxWeek">S1</strong></div><div class="phase-kpi"><span>Bloque</span><strong id="hyroxBlock">Base</strong></div><div class="phase-kpi"><span>Sesión clave</span><strong>Martes</strong></div><div class="phase-kpi"><span>Regla</span><strong>RPE ≤ 8</strong></div></div>
+      <div class="phil-grid"><div class="phil-item"><div class="phil-icon">⚡</div><div class="phil-title">Martes: principal</div><p>El estímulo HYROX de la semana: técnica, densidad o carga. Después Z2 suave, no más intensidad.</p></div><div class="phil-item"><div class="phil-icon">🎯</div><div class="phil-title">Jueves: soporte</div><p>Core y estabilidad antes de calidad de running. Nunca convertirlo en un segundo metcon duro.</p></div><div class="phil-item"><div class="phil-icon">🏃</div><div class="phil-title">Sábado: integrado</div><p>Estación técnica de baja carga excéntrica + long run. Si chocan, gana el long run.</p></div><div class="phil-item"><div class="phil-icon">↗</div><div class="phil-title">Progresión</div><p>Base → densidad → especificidad → taper. Deloads S4 y S8; sin saltos al cajón ni pliometría innecesaria.</p></div></div>
+    </section>
+    <section><h2><span class="h2-num">02</span> Semanas sincronizadas</h2><div id="hyroxNav" class="week-nav"></div><div id="hyroxContent"></div></section>
+    <section><h2><span class="h2-num">03</span> Coordinación con la semana</h2>
+      <table class="compat-table"><thead><tr><th>Día</th><th>Trabajo</th><th>Límite de fatiga</th></tr></thead><tbody><tr><td>Lunes</td><td>Upper A — press inclinado máquina, jalón bilateral, laterales unilaterales</td><td>Prioridad hipertrofia.</td></tr><tr><td>Martes</td><td>HYROX principal + Z2</td><td>RPE 6–8; Z2 separada si es posible.</td></tr><tr><td>Miércoles</td><td>Pierna pesada</td><td>No running duro.</td></tr><tr><td>Jueves</td><td>Core ligero + calidad running</td><td>Core RPE 4–5; la carrera determina el esfuerzo.</td></tr><tr><td>Viernes</td><td>Upper B — incluye jalón unilateral</td><td>Sin metcon adicional.</td></tr><tr><td>Sábado</td><td>HYROX técnico + long run</td><td>RPE 6–7; si no hay frescura, omite el bloque HYROX.</td></tr><tr><td>Domingo</td><td>Descanso total</td><td>Caminar/movilidad opcional.</td></tr></tbody></table>
+    </section>
+    <section><h2><span class="h2-num">04</span> Tracking compatible</h2><div class="phase2-note"><strong>Registra:</strong> carga de sled/KB/sandbag, rondas, distancia, tiempo y RPE. Para comparar semanas, conserva el mismo implemento o anota sustituciones. La Fase 1 sigue disponible intacta; estos HTML originales no contienen un sistema de localStorage, por lo que no hay registros internos que migrar o borrar.</div></section>
+  </div>
 </main>
 
 <script>
@@ -1617,6 +1640,23 @@ function showWeek(num) {
   document.getElementById('week-' + num).classList.add('visible');
   document.querySelectorAll('.week-btn')[num - 1].classList.add('active');
 }
+const hyroxWeeks=[
+['Base','EMOM técnico 24 min: min 1 Ski/Row 45 s, min 2 10 KB swings, min 3 10 wall balls, min 4 farmer carry 40 m. 6 rondas. RPE 6.','Core: Pallof 3×10/lado, dead bug 3×8/lado, side plank 3×25 s.','2 rondas suaves: 500 m Ski/Row + 12 step-ups + 40 m suitcase carry.'],
+['Base','AMRAP 22 min: 500 m row, 12 goblet squats, 10 push press ligero, 12 walking lunges, 8 burpees sin salto. RPE 7.','Core + movilidad de cadera 18 min; sin fatiga de piernas.','3 rondas técnicas: 400 m bike + 40 m farmer carry + 12 wall balls.'],
+['Base','4 rondas por calidad: 600 m Ski/Row + sled push 15 m + sled pull 15 m + 15 KB swings + 12 wall balls. Descansa 2 min. RPE 7.','Pallof, Copenhagen corto, bird dog; 15–20 min.','2 rondas: 500 m row + 20 sandbag lunges alternos; RPE 6.'],
+['Deload','Circuito 3 rondas: 400 m bike, 8 KB swings ligeros, 8 wall balls ligeros, 30 m carry. RPE 5.','Movilidad + respiración + core 12 min.','Solo long run; movilidad opcional.'],
+['Densidad','AMRAP 25 min: 600 m row, sled push/pull 15 m c/u, 12 wall balls, 40 m farmer carry. Mantén ritmo uniforme.','Core anti-rotación 3 rondas + 4 strides; RPE 4.','2 rondas: 500 m Ski + 16 step-ups con carga ligera + 40 m carry.'],
+['Densidad','5 rondas: 500 m Ski, 15 sandbag walking lunges, 12 push press, 10 burpees sin salto. Descanso 90 s; RPE 7–8.','Core: ab wheel 3×6–8, suitcase carry 3×30m/lado.','2 rondas de técnica sled + 10 wall balls; corta si altera el long run.'],
+['Densidad','For quality 4 rondas: 800 m row, sled push 20 m, sled pull 20 m, 15 wall balls, 50 m farmer carry. Registra tiempo; RPE 8.','Movilidad, dead bug, Pallof: máximo 15 min.','Solo 1–2 rondas ligeras: 500 m bike + 12 lunges + carry.'],
+['Deload','EMOM 16 min: 40 s bike/row, 8 swings ligeros, 8 step-ups, descanso. RPE 5.','Core suave + movilidad 12 min.','Solo long run.'],
+['Específico','3 bloques: 800 m run/bike + sled push 25 m + 800 m run/bike + sled pull 25 m + 20 wall balls. Descansa 3 min/bloque. RPE 7.','Core ligero, glúteo medio y movilidad; 15 min.','2 rondas: 500 m Ski + 50 m farmer carry + 12 sandbag lunges.'],
+['Específico','Simulación parcial 4 estaciones: 800 m run/bike → 800 m Ski → 20 m sled push → 20 m sled pull → 20 wall balls → 50 m farmer carry. RPE 7; sin competir.','Solo activación para calidad running.','No HYROX si vas a hacer el primer 15K; prioriza long run.'],
+['Específico','4 rondas controladas: 600 m row + 15 wall balls + 16 walking lunges + 40 m carry. RPE 7, sin sprint final.','Core 12 min y movilidad.','1 ronda técnica opcional o directamente long run.'],
+['Taper','2 rondas: 400 m bike + 8 KB swings ligeros + 8 wall balls + 20 m carry. RPE 4–5.','Movilidad + 2×20 s plancha; nada más.','Sin HYROX: 15K objetivo.']
+];
+function renderHyrox(n){const w=hyroxWeeks[n-1];document.getElementById('hyroxWeek').textContent='S'+n;document.getElementById('hyroxBlock').textContent=w[0];document.getElementById('hyroxContent').innerHTML=`<div class="phase2-week active"><div class="week-meta"><span class="week-meta-title">Semana ${n} — ${w[0]}</span><span class="week-meta-item">Martes: <strong>principal</strong></span><span class="week-meta-item">Jueves: <strong>soporte</strong></span></div><div class="sessions-grid"><div class="session-card"><div class="session-header tue"><span class="session-day-label">Martes</span><span class="session-format-badge">HYROX principal</span></div><div class="session-body"><div class="session-title">Motor + estaciones</div><p class="session-goal">${w[1]}</p><div class="block-note">Después: Z2 programada en la página de running, fácil y separada si es posible.</div></div></div><div class="session-card"><div class="session-header thu"><span class="session-day-label">Jueves / Sábado</span><span class="session-format-badge">soporte</span></div><div class="session-body"><div class="session-title">Core + integración</div><p class="session-goal"><strong>Jueves:</strong> ${w[2]}</p><p class="session-goal"><strong>Sábado:</strong> ${w[3]}</p></div></div></div></div></div>`;document.querySelectorAll('#hyroxNav button').forEach((b,i)=>b.classList.toggle('active',i===n-1));}
+document.getElementById('hyroxNav').innerHTML=hyroxWeeks.map((w,i)=>`<button class="week-btn ${i===0?'active':''} ${w[0]==='Deload'?'deload':''}" onclick="renderHyrox(${i+1})">S${i+1}${w[0]==='Deload'?' ↓':''}</button>`).join('');renderHyrox(1);
+function showPhase(id){document.querySelectorAll('.phase-panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.phase-switch button').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(id==='phase2'?'fase 2':'fase 1')));window.scrollTo({top:0,behavior:'smooth'});}
 </script>
 </body>
 </html>
